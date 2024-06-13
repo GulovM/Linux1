@@ -1,0 +1,10 @@
+#!/bin/bash
+##this line is needed so that when running this file bash understands what
+##scripts will go next 
+
+##username request
+echo "Enter your username"
+##read the name
+read user_name
+##display a welcome message
+echo "Hello, $user_name !"

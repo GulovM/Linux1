@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+	echo "Usage: $0 <FileName>"
+	exit1
+fi
+
+# File name
+INPUT_FILE=$1
+
+# Output file
+OUTPUT_FILE="sorted_${INPUT_FILE}"
+
+#Check if input file exists
+if [ ! -f "$INPUT_FILE" ]; then
+	echo "FIle not found: $INPUT_FILE"
+	exit 1
+fi
+
+# Sort file
+sort "$INPUT_FILE" > "$OUTPUT_FILE"
+
+echo "Sorted content has been saved to $OUTPUT_FILE"

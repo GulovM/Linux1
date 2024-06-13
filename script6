@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Ensure the scipt uses UTF-8 encoding
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Check if exactly two arguments are provided
+if [ "$#" -ne 1 ]; then
+	echo "Usage: $0 <directory>"
+	exit 1
+fi
+
+# Source and destination directories
+DIR=$1
+
+# Check if directory exists
+if [ ! -d "$DIR" ]; then
+	echo "Directory does not exists: $DIR"
+	exit 1
+fi
+
+# Get the current date
+CURRENT_DATE=$(date +%Y-%m-%d)
+
+# Create the backup file name
+BACKUP_FILE="$DIR/backup_$(basename $DIR)_$CURRENT_DATE.tar.gz"
+
+# Create the backup
+tar -czf "$BACKUP_FILE" -C "$DIR" .
+
+#Check if the backup was created successfully
+if [ $? -eq 0 ]; then
+	echo "Backup created successfully: $BACKUP_FILE"
+else
+	echo "Backup failed"
+	exit 1
+fi

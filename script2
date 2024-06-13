@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# check if exactly one argument is provided
+if [ "$#" -ne 1 ]; then
+	echo "Usage: $0 <directory_path>"
+	exit 1
+fi
+
+# Path to the target directory 
+TARGET_DIR=$1
+
+# New owner and group
+NEW_OWNER="user1"
+NEW_GROUP="lab_group"
+
+# Change owner and group for all files and directories inside the target dir
+chown -R $NEW_OWNER:$NEW_GROUP "$TARGET_DIR"
+
+# Set permission for all files inside the target directory
+# Owner: read, write, execute; Group: read, write; Others: read
+find "$TARGET_DIR" -type f -exec chmod 764 {} \;
+
+echo "All files and directories inside $TARGET_DIR have bin updated."
+
+
